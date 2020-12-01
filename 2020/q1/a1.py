@@ -1,3 +1,5 @@
+import csv
+
 '''
 Before you leave, the Elves in accounting just need you to fix your expense
 report (your puzzle input); apparently, something isn't quite adding up.
@@ -23,20 +25,35 @@ def sum_is_2020(a, b):
     return a + b == 2020
 
 
-def find_entries(ls):
+def find_entries_product(ls):
+    print(ls)
     a = ls
     b = ls
     for i in a:
         for j in b:
             if not sum_is_2020(i, j):
                 break
-            return i,j
+            return i*j
+    print('nothing found')
+
+def find_product(ls):
+    first = ls[0]
+    rest = ls[1:]
+    products = [first * x for x in rest if sum_is_2020(first, x)]
+    return products[0] if len(products) > 0 else None
 
 
-def test_find_entries():
-    x,y = find_entries(test_input)
-    assert x in [299, 1721]
-    assert y in [299, 1721]
+def part1(i):
+    return find_product(i)
 
 
-test_find_entries()
+input = []
+reader = csv.reader(open('input-a.txt'), delimiter='\t')
+for r in reader:
+    input.append(int(r[0]))
+
+# part one test
+assert part1(test_input) == 514579
+a = part1(input)
+print('part 1 answer:')
+print(a)
