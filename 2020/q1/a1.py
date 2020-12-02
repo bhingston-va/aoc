@@ -26,7 +26,6 @@ def sum_is_2020(a, b):
 
 
 def find_entries_product(ls):
-    print(ls)
     a = ls
     b = ls
     for i in a:
@@ -40,11 +39,27 @@ def find_product(ls):
     first = ls[0]
     rest = ls[1:]
     products = [first * x for x in rest if sum_is_2020(first, x)]
-    return products[0] if len(products) > 0 else None
+    (p, found) = (products[0], True) if len(products) > 0 else (None, False)
+    return p, found
 
 
 def part1(i):
-    return find_product(i)
+    return _defer_part1(i)
+
+def _defer_part1(ls):
+    p, found = find_product(ls)
+    if found:
+        return p
+
+    l = ls
+    done = found
+    while not done:
+        l = l[1:]
+        p, done = find_product(l)
+        if len(l) < 2:
+            done = True
+
+    return p
 
 
 input = []
