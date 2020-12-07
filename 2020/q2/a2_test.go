@@ -32,3 +32,22 @@ func TestPart1_WithInput(t *testing.T) {
 	actual := Part1(input)
 	assert.Equal(t, 536, actual)
 }
+
+func TestPart2_WithTestData(t *testing.T) {
+	input := testInput()
+	actual := Part2(input)
+	assert.Equal(t, 1, actual)
+}
+
+func TestIsValid2_WithTestData(t *testing.T) {
+	assert.True(t, isValid2(valid_1))
+	assert.False(t, isValid2(invalid))
+	assert.False(t, isValid2(valid_2))
+}
+
+func TestPart2_WithInput(t *testing.T) {
+	input, err := Input("./input.txt")
+	assert.Nil(t, err)
+	actual := Part2(input)
+	assert.Equal(t, 558, actual)
+}

@@ -120,6 +120,20 @@ func isValid(pp passwordPolicy) bool {
 	return c >= pp.Min && c <= pp.Max
 }
 
+func isValid2(pp passwordPolicy) bool {
+	pos1 := pp.Min - 1
+	pos2 := pp.Max - 1
+	p1IsChar := string(pp.Pswd[pos1]) == pp.Char
+	p2IsChar := string(pp.Pswd[pos2]) == pp.Char
+	if p1IsChar && p2IsChar {
+		return false
+	}
+	if p1IsChar || p2IsChar {
+		return true
+	}
+	return false
+}
+
 func Input(path string) ([]passwordPolicy, error) {
 	p := "./q2/input.txt"
 	if path != "" {
@@ -139,7 +153,6 @@ func Input(path string) ([]passwordPolicy, error) {
 		ls = append(ls, pp)
 	}
 	return ls, s.Err()
-
 }
 
 // How many passwords are valid?
@@ -154,6 +167,14 @@ func Part1(input []passwordPolicy) int {
 	return n
 }
 
+//How many passwords are valid according to the new interpretation of the policies?
 func Part2(input []passwordPolicy) int {
-	return 0
+	n := 0
+	for _, v := range input {
+		if isValid2(v) {
+			n += 1
+		}
+	}
+
+	return n
 }

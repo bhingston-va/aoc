@@ -12,9 +12,12 @@ func main() {
 		fmt.Errorf("failed to get input: %s", err.Error())
 		os.Exit(-1)
 	}
-	a2 := q2.Part1(input)
+	a2a := q2.Part1(input)
 	fmt.Println("answer to Q2 part 1:")
-	fmt.Println(a2)
+	fmt.Println(a2a)
+	a2b := q2.Part2(input)
+	fmt.Println("answer to Q2 part 2:")
+	fmt.Println(a2b)
 
 	os.Exit(0)
 }
