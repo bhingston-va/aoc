@@ -123,13 +123,31 @@ func (tp *Trip) Sled() {
 	}
 }
 
-func Part1(input Navigator) int {
-	s := Coord{x: 3, y: 1}
-	t := NewTrip(input, s)
+func part1Defer(nav Navigator, slope Coord) int {
+	t := NewTrip(nav, slope)
 	t.Sled()
 	return t.treesEncountered
 }
 
+func Part1(input Navigator) int {
+	s := Coord{x: 3, y: 1}
+	return part1Defer(input, s)
+}
+
+func part2DeferSync(nav Navigator) int {
+	s1 := Coord{x: 1, y: 1}
+	s2 := Coord{x: 3, y: 1}
+	s3 := Coord{x: 5, y: 1}
+	s4 := Coord{x: 7, y: 1}
+	s5 := Coord{x: 1, y: 2}
+	n1 := part1Defer(nav, s1)
+	n2 := part1Defer(nav, s2)
+	n3 := part1Defer(nav, s3)
+	n4 := part1Defer(nav, s4)
+	n5 := part1Defer(nav, s5)
+	return n1 * n2 * n3 * n4 * n5
+}
+
 func Part2(input Navigator) int {
-	return 0
+	return part2DeferSync(input)
 }

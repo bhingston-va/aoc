@@ -30,6 +30,9 @@ func question3() {
 	fmt.Println("answer to Q3 part 1:")
 	a := q3.Part1(input)
 	fmt.Println(a)
+	fmt.Println("answer to Q3 part 2:")
+	b := q3.Part2(input)
+	fmt.Println(b)
 }
 
 func main() {

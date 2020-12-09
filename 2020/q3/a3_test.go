@@ -23,3 +23,10 @@ func TestPart2_WithTestData(t *testing.T) {
 	product := Part2(grid)
 	assert.Equal(t, 336, product)
 }
+
+func TestPart2_WithData(t *testing.T) {
+	grid, err := Input("./input.txt")
+	assert.Nil(t, err)
+	actualTreeEncountments := Part2(grid)
+	assert.Equal(t, 6419669520, actualTreeEncountments)
+}
