@@ -129,3 +129,7 @@ func Part1(input Navigator) int {
 	t.Sled()
 	return t.treesEncountered
 }
+
+func Part2(input Navigator) int {
+	return 0
+}
