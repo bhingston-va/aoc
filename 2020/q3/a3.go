@@ -69,6 +69,25 @@ encounter 7 trees.
 
 Starting at the top-left corner of your map and following a slope of right 3 and
 down 1, how many trees would you encounter?
+
+--- Part Two ---
+Time to check the rest of the slopes - you need to minimize the probability of a
+sudden arboreal stop, after all.
+
+Determine the number of trees you would encounter if, for each of the following
+slopes, you start at the top-left corner and traverse the map all the way to the
+bottom:
+
+Right 1, down 1.
+Right 3, down 1. (This is the slope you already checked.)
+Right 5, down 1.
+Right 7, down 1.
+Right 1, down 2.
+In the above example, these slopes would find 2, 7, 3, 4, and 2 tree(s)
+respectively; multiplied together, these produce the answer 336.
+
+What do you get if you multiply together the number of trees encountered on each
+of the listed slopes?
 */
 
 type Coord struct {
@@ -78,16 +97,17 @@ type Coord struct {
 type Trip struct {
 	nav              Navigator
 	loc              Coord
+	slope            Coord
 	treesEncountered int
 }
 
-func NewTrip(nav Navigator) *Trip {
-	return &Trip{nav: nav}
+func NewTrip(nav Navigator, slope Coord) *Trip {
+	return &Trip{nav: nav, slope: slope}
 }
 
 func (tp *Trip) move() {
-	tp.loc.x += 3
-	tp.loc.y += 1
+	tp.loc.x += tp.slope.x
+	tp.loc.y += tp.slope.y
 	if ter := tp.nav.GetTerrain(tp.loc); ter == tree {
 		tp.treesEncountered += 1
 	}
@@ -104,7 +124,8 @@ func (tp *Trip) Sled() {
 }
 
 func Part1(input Navigator) int {
-	t := NewTrip(input)
+	s := Coord{x: 3, y: 1}
+	t := NewTrip(input, s)
 	t.Sled()
 	return t.treesEncountered
 }

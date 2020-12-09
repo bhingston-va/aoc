@@ -7,7 +7,8 @@ import (
 
 func TestPart1_WithTestData(t *testing.T) {
 	grid := testInput()
-	trip := NewTrip(grid)
+	slope := Coord{x: 3, y: 1}
+	trip := NewTrip(grid, slope)
 
 	trip.Sled()
 	actualTreeEncountments := trip.treesEncountered
@@ -18,7 +19,8 @@ func TestPart1_WithTestData(t *testing.T) {
 func TestPart1_WithInput(t *testing.T) {
 	grid, err := Input("./input.txt")
 	assert.Nil(t, err)
-	trip := NewTrip(grid)
+	slope := Coord{x: 3, y: 1}
+	trip := NewTrip(grid, slope)
 
 	trip.Sled()
 	actualTreeEncountments := trip.treesEncountered
